@@ -37,7 +37,8 @@ public class EmotionDetectionServiceImpl implements EmotionDetectionService {
 
     @Value("${gemini.api.key}")
     private String geminiApiKey;
-
+    @Value("${flask.api.url")
+    private String FLASK_API_URL;
 
     @Autowired
     private ProcessingRepository processingRepository;
@@ -45,7 +46,7 @@ public class EmotionDetectionServiceImpl implements EmotionDetectionService {
     @Autowired
     private UserClient userClient;
 
-    private static final String FLASK_API_URL = "http://localhost:5000/process-frame";
+
 //    private static final String GEMINI_API_URL_TEMPLATE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=";
     @Override
     @Async
