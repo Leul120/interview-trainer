@@ -1,5 +1,6 @@
 FROM openjdk:21
 WORKDIR /app
+RUN chmod +x mvnw
 COPY . .
 RUN ./mvnw clean package -DskipTests
 EXPOSE 8084
