@@ -1,5 +1,6 @@
 FROM openjdk:21
 WORKDIR /app
-COPY target/notificationService.jar app.jar
+COPY . .
+RUN ./mvnw clean package -DskipTests
 EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "target/notificationService.jar"]
