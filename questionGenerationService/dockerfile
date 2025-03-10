@@ -13,6 +13,6 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:21
 WORKDIR /app
-COPY --from=build /app/target/questionGenerationService-0.0.1-SNAPSHOT.jar
-EXPOSE 8081
+COPY --from=build /app/target/questionGenerationService-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8087
 ENTRYPOINT ["java", "-jar", "app.jar"]
