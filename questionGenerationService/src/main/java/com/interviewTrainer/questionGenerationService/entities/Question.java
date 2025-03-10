@@ -33,7 +33,7 @@ public class Question {
     private String expectedAnswer;
 
     private LocalDateTime createdAt;
-    ;
+
 }
 
 
