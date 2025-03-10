@@ -24,8 +24,7 @@ public class QuestionGeneratorServiceImpl implements QuestionGeneratorService {
     private final ObjectMapper objectMapper;
     private final QuestionRepository questionRepository;
 
-    @Value("${openai.api.key}")
-    private String openAiApiKey;
+
     @Value("${gemini.api.key}")
     private String geminiApiKey;
 
