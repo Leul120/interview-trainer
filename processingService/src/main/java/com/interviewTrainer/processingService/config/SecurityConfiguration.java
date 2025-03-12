@@ -41,7 +41,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(exchange ->
                         exchange
-                                .requestMatchers("/api/v1/user/signup","/api/v1/user/signin","/api/v1/user/refresh-token","/api/v1/processing/give-analysis","/api/v1/processing/analyze-video/**").permitAll()
+                                .requestMatchers("/api/v1/user/signup","/api/v1/user/signin","/api/v1/user/refresh-token","/api/v1/processing/give-analysis","/api/v1/processing/analyze-video/**","/api/v1/processing").permitAll()
                                 .requestMatchers("/api/v1/processing/give-analysis","/api/v1/processing/analyze-video/**","/api/v1/processing/get-analysis-by-session/**").hasAnyAuthority("USER")
                                 .anyRequest().authenticated()
                 )
