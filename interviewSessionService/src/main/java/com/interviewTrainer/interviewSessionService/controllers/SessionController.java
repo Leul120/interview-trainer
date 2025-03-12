@@ -20,6 +20,11 @@ import java.util.UUID;
 public class SessionController {
     @Autowired
     private SessionService sessionService;
+
+    @GetMapping
+    public ResponseEntity<String> get(){
+        return ResponseEntity.ok("hello world!");
+    }
     @GetMapping
     public ResponseEntity<String> get(@RequestAttribute("username") String username){
         return ResponseEntity.ok("hello"+username);
