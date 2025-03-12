@@ -45,7 +45,11 @@ public class JwtAuthenticationFilter implements GatewayFilter {
                     "/api/v1/user/public/**",  // Allow public user endpoints
                     "/api/v1/user/public",
                     "/api/v1/auth/login",     // Allow login
-                    "/api/v1/auth/register"   // Allow registration
+                    "/api/v1/auth/register",
+                    "/api/v1/question",
+                    "/api/v1/processing",
+                    "/api/v1/service",
+                    "/api/v1/session"
             );
 
             String path = request.getPath().toString();
