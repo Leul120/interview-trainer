@@ -22,7 +22,7 @@ public class SessionController {
     private SessionService sessionService;
 
     @GetMapping
-    public ResponseEntity<String> get(){
+    public ResponseEntity<String> gets(){
         return ResponseEntity.ok("hello world!");
     }
     @GetMapping
