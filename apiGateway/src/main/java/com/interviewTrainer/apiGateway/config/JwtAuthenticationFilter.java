@@ -49,7 +49,9 @@ public class JwtAuthenticationFilter implements GatewayFilter {
                     "/api/v1/question",
                     "/api/v1/processing",
                     "/api/v1/service",
-                    "/api/v1/session"
+                    "/api/v1/session",
+                    "/api/v1/user",
+                    "/api/v1/auth"
             );
 
             String path = request.getPath().toString();
