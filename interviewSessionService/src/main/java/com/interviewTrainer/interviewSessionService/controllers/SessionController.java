@@ -25,7 +25,7 @@ public class SessionController {
     public ResponseEntity<String> gets(){
         return ResponseEntity.ok("hello world!");
     }
-    @GetMapping
+    @GetMapping("/u")
     public ResponseEntity<String> get(@RequestAttribute("username") String username){
         return ResponseEntity.ok("hello"+username);
     }
