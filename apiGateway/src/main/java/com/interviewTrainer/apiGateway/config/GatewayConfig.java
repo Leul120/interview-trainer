@@ -19,7 +19,7 @@ public class GatewayConfig {
         return builder.routes()
                 // 🔹 Auth Service (No Authentication)
                 .route("auth-service", r -> r.path("/api/v1/auth/**")
-                        .uri("lb://AUTHSERVICE"))
+                        .uri("lb://authService"))
 
                 // 🔹 User Service (JWT Authentication)
                 .route("user-service", r -> r.path("/api/v1/user/**")
