@@ -28,6 +28,11 @@ public class ProcessingController {
     @Autowired
     private ProcessingRepository processingRepository;
 
+    @GetMapping
+    public ResponseEntity<String> get(){
+        return ResponseEntity.ok("hello world!");
+    }
+
     @PostMapping(value = "/analyze-video")
     public ResponseEntity<CompletableFuture<AiAnalysis>> analyzeVideo(
             @RequestParam("videoChunk") MultipartFile videoChunk,
