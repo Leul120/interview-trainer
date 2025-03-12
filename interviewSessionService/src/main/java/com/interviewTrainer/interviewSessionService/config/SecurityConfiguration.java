@@ -44,7 +44,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(exchange ->
                         exchange
-                                .requestMatchers("/api/v1/session/get-my-sessions","/ws/**").permitAll()
+                                .requestMatchers("/api/v1/session/get-my-sessions","/ws/**","/api/v1/session").permitAll()
                                 .requestMatchers("/api/v1/session/get-my-sessions","/api/v1/session/schedule-interview","/api/v1/session/get-my-scheduled-interviews").hasAnyAuthority("USER")
                                 .requestMatchers("/api/v1/user/**").hasAnyAuthority("ADMIN")
                                 .anyRequest().authenticated()
