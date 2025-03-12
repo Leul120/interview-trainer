@@ -18,6 +18,11 @@ import java.util.UUID;
 public class QuestionController {
     private final QuestionGeneratorService questionGeneratorService;
 
+    @GetMapping
+    public ResponseEntity<String> get(){
+        return ResponseEntity.ok("hello world!");
+    }
+
     @GetMapping("/generate-question/{category}/{difficulty}/{sessionId}")
     public ResponseEntity<Question> generateQuestion(@RequestAttribute("userId") UUID userId,@PathVariable String category, @PathVariable DifficultyLevel difficulty, @PathVariable UUID sessionId, @RequestParam("focusArea") String focusArea,@RequestParam("description") String description) throws JsonProcessingException {
         return ResponseEntity.ok(questionGeneratorService.generateQuestion(category,difficulty,sessionId,focusArea,description,userId));
