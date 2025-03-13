@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
-@FeignClient(name = "user-service", url = "http://localhost:8085", path = "/api/v1/user")
+@FeignClient(name = "user-service", url = "https://user-service-7p0j.onrender.com", path = "/api/v1/user")
 public interface UserClient {
     @GetMapping("/get-user/{email}")
     public ResponseEntity<String> getUserByEmail(@PathVariable String email);
