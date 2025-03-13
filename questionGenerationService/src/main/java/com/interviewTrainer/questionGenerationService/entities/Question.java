@@ -14,7 +14,7 @@ public class Question {
     private UUID id;
 
     @Lob // Enables long strings for the question text
-    @Column(length = 20000) // You can adjust this length as needed
+    @Column(length = 20000,columnDefinition = "TEXT") // You can adjust this length as needed
     private String questionText;
     private UUID userId;
 
@@ -29,7 +29,7 @@ public class Question {
 //    private boolean isAnsweredCorrectly;
 
     @Lob // Enables long expected answers
-    @Column(length = 20000)
+    @Column(length = 20000,columnDefinition = "TEXT")
     private String expectedAnswer;
 
     private LocalDateTime createdAt;
