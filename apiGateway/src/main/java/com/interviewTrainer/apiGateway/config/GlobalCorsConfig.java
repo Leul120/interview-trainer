@@ -27,7 +27,7 @@ public class GlobalCorsConfig {
             if (CorsUtils.isCorsRequest(request)) {
                 ServerHttpResponse response = ctx.getResponse();
                 HttpHeaders headers = response.getHeaders();
-                headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+                headers.add("Access-Control-Allow-Origin", "https://intervw.vercel.app");
                 headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
                 headers.add("Access-Control-Allow-Headers", "Authorization, Content-Type");
                 headers.add("Access-Control-Max-Age", "3600");
