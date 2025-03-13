@@ -37,7 +37,7 @@ public class EmotionDetectionServiceImpl implements EmotionDetectionService {
 
     @Value("${gemini.api.key}")
     private String geminiApiKey;
-    @Value("${flask.api.url")
+    @Value("${flask.api_url}")
     private String FLASK_API_URL;
 
     @Autowired
