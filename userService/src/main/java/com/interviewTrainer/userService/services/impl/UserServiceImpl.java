@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
     @Override
-    @Cacheable(value = "userResponses" ,key="#ids",unless = "#result == null")
+//    @Cacheable(value = "userResponses" ,key="#ids",unless = "#result == null")
     public List<UserResponseDTO> getUsersByIds(List<UUID> ids) {
         List<User> users = userRepository.findByIdIn(ids);
         return users.stream().map(this::mapToDTO).collect(Collectors.toList());
