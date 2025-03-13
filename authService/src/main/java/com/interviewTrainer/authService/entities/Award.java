@@ -11,10 +11,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Award {
 
-    private UUID id;
     private String title;
     private Year year;
     private String category;
     private String description;
-    private User user;
 }
