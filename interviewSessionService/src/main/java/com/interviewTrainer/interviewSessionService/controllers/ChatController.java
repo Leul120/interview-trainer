@@ -38,7 +38,7 @@ public class ChatController {
     public Set<String> getOnlineUsers() {
         return onlineUsersService.getOnlineUsers();
     }
-    
+
     @GetMapping("/conversations")
     public List<UserResponseDTO> conversations(@RequestAttribute("userId") UUID userId) {
         List<UUID> ids=chatMessageRepository.getConversations(userId);
