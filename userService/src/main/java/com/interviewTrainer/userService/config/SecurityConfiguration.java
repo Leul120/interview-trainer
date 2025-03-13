@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(exchange ->
                         exchange
-                                .requestMatchers("/api/v1/user/signup","/api/v1/user/signin","/api/v1/user/refresh-token","/api/v1/user/load-user-by-email/**","/api/v1/user/load-user-by-emailE/**","/api/v1/user/upload","/api/v1/user/public/get-interviewers","/api/v1/user/public/get-user-by-id/**","api/v1/user/get-users-by-ids/**","api/v1/user/get-user/**","/api/v1/user/update-score/**").permitAll()
+                                .requestMatchers("/api/v1/user/signup","/api/v1/user/signin","/api/v1/user/refresh-token","/api/v1/user/load-user-by-email/**","/api/v1/user/load-user-by-emailE/**","/api/v1/user/upload","/api/v1/user/public/get-interviewers","/api/v1/user/public/get-user-by-id/**","api/v1/user/get-users-by-ids/**","api/v1/user/get-user/**","/api/v1/user/update-score/**","/api/v1/user").permitAll()
                                 .requestMatchers("/api/v1/user/online-status/**","api/v1/user/get-user-by-id/**").hasAnyAuthority(Role.USER.name())
                                 .requestMatchers("/api/v1/user/**").hasAnyAuthority(Role.ADMIN.name())
                                 .anyRequest().authenticated()
