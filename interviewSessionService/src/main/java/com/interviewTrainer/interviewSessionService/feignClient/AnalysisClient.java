@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(name = "processingService",url = "http://localhost:8084",path = "/api/v1/processing",configuration = FeignClientConfig.class)
+@FeignClient(name = "processingService",url = "https://processing-service-njlu.onrender.com",path = "/api/v1/processing",configuration = FeignClientConfig.class)
 public interface AnalysisClient {
     @GetMapping("/get-analysis-by-session/{sessionId}")
     public ResponseEntity<List<AiAnalysis>> getAnalysis(@PathVariable UUID sessionId) throws IOException;
