@@ -36,15 +36,15 @@ public class QuestionGeneratorServiceImpl implements QuestionGeneratorService {
     }
     public Question generateQuestion(String category, DifficultyLevel difficulty, UUID sessionId,String focusArea,String description,UUID userId) throws JsonProcessingException {
         try {
-            List<Question> questions=getQuestionBySessionId(sessionId);
-            System.out.println(questions);
+//            List<Question> questions=getQuestionBySessionId(sessionId);
+//            System.out.println(questions);
 
-            List<String> questionTexts=questions.stream().map(Question::getQuestionText).toList();
+//            List<String> questionTexts=questions.stream().map(Question::getQuestionText).toList();
             String prompt = "Generate a high-quality " + difficulty.name().toLowerCase() +
-                    " level interview question commonly asked by well-known companies in the '" + category +
+                    " level unique interview question commonly asked by well-known companies in the '" + category +
                     "' domain. The question should focus on the following key areas: '" + focusArea +
                     "'.\n\nContext: " + description +
-                    "'and do not repeat any questions from this "+questionTexts.toString()+
+//                    "'and do not repeat any questions from this "+questionTexts.toString()+
                     "\n\nProvide the response in the following structured format:\n" +
                     "Question: <question_text>\n" +
                     "Answer: <concise_expected_answer>";
