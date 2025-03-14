@@ -20,37 +20,23 @@ import java.util.List;
 
 @Configuration
 public class GlobalCorsConfig {
-
-    private static final List<String> ALLOWED_ORIGINS = List.of(
-            "https://intervw.vercel.app",
-            "http://localhost:3000"
-    );
-
     @Bean
     public WebFilter corsFilter() {
-        return (ServerWebExchange exchange, WebFilterChain chain) -> {
-            ServerHttpRequest request = exchange.getRequest();
-            ServerHttpResponse response = exchange.getResponse();
-            HttpHeaders headers = response.getHeaders();
-
+        return (ServerWebExchange ctx, WebFilterChain chain) -> {
+            ServerHttpRequest request = ctx.getRequest();
             if (CorsUtils.isCorsRequest(request)) {
-                String requestOrigin = request.getHeaders().getOrigin();
-
-                if (requestOrigin != null && ALLOWED_ORIGINS.contains(requestOrigin)) {
-                    headers.set("Access-Control-Allow-Origin", requestOrigin);
-                }
-
+                ServerHttpResponse response = ctx.getResponse();
+                HttpHeaders headers = response.getHeaders();
+                headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
                 headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
                 headers.add("Access-Control-Allow-Headers", "Authorization, Content-Type");
                 headers.add("Access-Control-Max-Age", "3600");
-
                 if (request.getMethod() == HttpMethod.OPTIONS) {
                     response.setStatusCode(HttpStatus.OK);
                     return Mono.empty();
                 }
             }
-
-            return chain.filter(exchange);
+            return chain.filter(ctx);
         };
     }
 }
