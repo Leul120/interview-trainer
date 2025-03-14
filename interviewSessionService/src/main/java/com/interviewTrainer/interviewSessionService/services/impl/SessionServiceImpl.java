@@ -156,7 +156,7 @@ public class SessionServiceImpl implements SessionService {
         }
     }
     @Override
-    @Cacheable(value = "interviewSessions")
+//    @Cacheable(value = "interviewSessions")
     public PagingResult<InterviewSession> getIntervieweeSessions(UUID userId, PaginationRequest request) {
         Pageable pageable = PaginationUtils.getPageable(request);
 
@@ -174,7 +174,7 @@ public class SessionServiceImpl implements SessionService {
 
 
     @Override
-    @Cacheable(value = "interviewSchedules")
+//    @Cacheable(value = "interviewSchedules")
     public PagingResult<ScheduledInterview> getIntervieweeSchedules(UUID userId,PaginationRequest request){
         Pageable pageable=PaginationUtils.getPageable(request);
         Page<ScheduledInterview> schedules=scheduledInterviewRepository.findByIntervieweeId(userId,pageable);
@@ -244,7 +244,7 @@ public class SessionServiceImpl implements SessionService {
 
     }
     @Override
-    @CachePut(value = "interviewSchedules")
+//    @CachePut(value = "interviewSchedules")
     public ScheduledInterview schedule(UUID userId,ScheduledInterview scheduledInterview){
         scheduledInterview.setIntervieweeId(userId);
         return scheduledInterviewRepository.save(scheduledInterview);
