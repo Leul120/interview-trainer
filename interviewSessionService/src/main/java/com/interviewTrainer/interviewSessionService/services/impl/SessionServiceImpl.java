@@ -39,8 +39,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -113,37 +111,34 @@ public class SessionServiceImpl implements SessionService {
     }
     @Override
     @Transactional
-    public InterviewSession startSession(UUID userId, UUID scheduledId) throws MessagingException {
-        // Fetch the scheduled interview
-        ScheduledInterview scheduledInterview = scheduledInterviewRepository.findById(scheduledId)
-                .orElseThrow(() -> new NotFoundException("A scheduled interview not found!"));
+    public InterviewSession startSession(UUID userId,UUID scheduledId) throws MessagingException {
+        ScheduledInterview scheduledInterview=scheduledInterviewRepository.findById(scheduledId).orElseThrow(()->new NotFoundException("A scheduled interview not found!"));
+        System.out.println("now"+LocalDateTime.now());
+        System.out.println("sch"+scheduledInterview.getScheduledAt());
+        System.out.println(!(scheduledInterview.getInterviewerId().equals(userId) || scheduledInterview.getIntervieweeId().equals(userId)));
+        System.out.println(LocalDateTime.now().isBefore(scheduledInterview.getScheduledAt())
+                || LocalDateTime.now().isAfter(scheduledInterview.getScheduledAt().plusHours(2)));
 
-        // Use ZonedDateTime for UTC time
-        ZonedDateTime currentTimeUtc = ZonedDateTime.now(ZoneId.of("UTC"));
-        ZonedDateTime interviewStartTimeUtc = scheduledInterview.getScheduledAt().atZone(ZoneId.of("UTC"));
-
-        // Debugging logs
-        System.out.println("Current Time (UTC): " + currentTimeUtc);
-        System.out.println("Scheduled Time (UTC): " + interviewStartTimeUtc);
-
-        // Check if the user is part of the interview
         if (!(scheduledInterview.getInterviewerId().equals(userId) || scheduledInterview.getIntervieweeId().equals(userId))) {
             throw new IllegalArgumentException("Unauthorized: You are not part of this interview.");
         }
 
-        // Validate the interview timing (using UTC)
-        if (currentTimeUtc.isBefore(interviewStartTimeUtc) || currentTimeUtc.isAfter(interviewStartTimeUtc.plusHours(2))) {
+        LocalDateTime currentTime = LocalDateTime.now().minusHours(9);
+
+        // Validate the interview timing
+        LocalDateTime interviewStartTime = scheduledInterview.getScheduledAt();
+        if (currentTime.isBefore(interviewStartTime) || currentTime.isAfter(interviewStartTime.plusHours(2))) {
             throw new IllegalArgumentException("The scheduled time has either not arrived or has already passed!");
         }
 
-        // Fetch user details
+        // Fetch user details in one API call
         ResponseEntity<UserResponseDTO> userResponse = userClient.getUserById(userId);
         if (userResponse.getBody() == null) {
             throw new NotFoundException("User not found!");
         }
         UserResponseDTO user = userResponse.getBody();
 
-        // Generate a unique room ID
+        // Generate a unique room ID using UUID
         String roomId = UUID.randomUUID().toString();
 
         // Request a session token
@@ -168,7 +163,7 @@ public class SessionServiceImpl implements SessionService {
         session.setStatus(InterviewStatus.ONGOING);
         session = sessionRepository.save(session);
 
-        // Fetch the other participant's details
+        // Fetch the other participant's details in a single API call
         UUID otherUserId = isInterviewer ? scheduledInterview.getIntervieweeId() : scheduledInterview.getInterviewerId();
         ResponseEntity<UserResponseDTO> otherUserResponse = userClient.getUserById(otherUserId);
         if (otherUserResponse.getBody() == null) {
