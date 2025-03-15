@@ -23,4 +23,6 @@ public interface UserClient {
     public List<UserResponseDTO> getUsersByEmails(@RequestBody List<String> emails);
     @GetMapping("/public/get-user-by-id/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id);
+    @PostMapping("/update-score/{userId}/{confidenceScore}/{overAllScore}")
+    public void updateScore(@PathVariable UUID userId,@PathVariable double confidenceScore,@PathVariable double overAllScore);
 }
