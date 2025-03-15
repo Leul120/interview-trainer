@@ -101,30 +101,33 @@ public class EmotionDetectionServiceImpl implements EmotionDetectionService {
 
         // Step 3: Prepare input for Gemini
         String prompt = String.format(
-                "Aight AI, listen up. I just had an interview, and I need you to break it down like a hood OG who just watched me fumble the bag in real-time. No sugarcoating. No sympathy. Just straight-up **disrespectful** analysis mixed with life-changing wisdom. Treat this like an intervention, because I clearly need help. Analyze my performance based on these tragic stats:\n\n" +
+                "Aight AI, strap in, because I just finished an interview, and I need you to analyze it like a washed-up coach watching their team blow a 50-point lead in the finals. No sugarcoating. No sympathy. Just straight-up **brutal honesty mixed with life-altering wisdom.** Imagine you’re a retired drill sergeant watching me ruin my chances in 4K. Let’s go.\n\n" +
 
-                        "1. **Biggest Emotion Showing on My Face:** %s (Bet it wasn’t ‘confidence’—more like ‘why am I even here?’😭)\n" +
-                        "2. **Frames Analyzed:** %d (That’s %d chances for me to embarrass myself on camera. Fantastic.)\n" +
-                        "3. **Eye Contact Score:** %d (Did I even look at the interviewer, or was I staring at the exit like a hostage?)\n" +
-                        "4. **Confidence Level:** %d (Scale of ‘Alpha Energy’ to ‘McDonald's drive-thru panic attack.’ Spoiler: I wasn’t at the alpha end.)\n" +
-                        "5. **Emotional Breakdown:** %s (Did I look calm, or like I just saw my GPA drop in real-time?)\n" +
+                        "Here’s the disaster report:\n\n" +
+
+                        "1. **Biggest Emotion Showing on My Face:** %s (Bet it wasn’t ‘confidence’—probably ‘I just remembered I left the stove on at home.’😭)\n" +
+                        "2. **Frames Analyzed:** %d (That’s %d frames of me committing career suicide in HD.)\n" +
+                        "3. **Eye Contact Score:** %d (Did I even acknowledge the interviewer, or did I just stare at the void like a Game Over screen?)\n" +
+                        "4. **Confidence Level:** %d (On a scale from ‘Alpha CEO’ to ‘Walmart intercom announcement panic,’ where did I land? Spoiler: Not the CEO.)\n" +
+                        "5. **Emotional Breakdown:** %s (Did I look composed, or like I just got an email saying ‘We regret to inform you...’ mid-interview?)\n" +
                         "6. **Question I Got:** %s\n" +
-                        "7. **My Answer:** %s (Did I drop knowledge, or was I just doing a spoken-word poem of failure?)\n\n" +
+                        "7. **My Answer:** %s (Did I sound like an intellectual, or did I just perform spoken-word gibberish?)\n\n" +
 
-                        "Alright AI,I need you to keep it 100 real and analyze my performance like you're a no-nonsense coach watching a rookie mess up the game and roast me like I just tried to rap battle and forgot my bars. BUT stick to the exact format below. ** Strictly follow this structure:**\n\n" +
+                        "Alright AI, I need you to **brutally** analyze my performance like you're a high school football coach who just watched their star player trip over their shoelaces and lose the championship. But stick to the exact format below. **Strictly follow this structure:**\n\n" +
 
-                        "emotionAnalysis: [Tell me if I looked like a confident pro, a deer in headlights, or a dude who just realized he left his stove on mid-interview. Don’t hold back—let me know if my face was sending distress signals, hurt my emotions with the best roast also.]\n\n" +
+                        "emotionAnalysis: [Did I look confident, or did I have the facial expression of a deer realizing it signed up for a job interview instead of crossing the road? Did my face scream ‘future CEO’ or ‘I’m being held hostage by my own anxiety’? Be creative and **roast me mercilessly.**]\n\n" +
 
-                        "aiFeedback: [Was my answer fire, or did I just give a masterclass in talking without saying a single useful thing? If I flopped, tell me how hard, and then break down the funeral-level mistakes I made. What should I have said instead?]\n\n" +
+                        "aiFeedback: [Did my answer deliver a TED Talk masterpiece, or was it a live demonstration of how to say **a whole lot of nothing**? If I flopped, tell me how hard, like ‘tripped and fell down an escalator’ levels of bad. Break down my **mistakes in a way that even a lost tourist could understand.** What should I have said instead?]\n\n" +
 
-                        "nextSteps: [Give me that **cold, hard truth** about what to fix before my next interview so I don’t sound like an NPC glitching mid-dialogue.]\n\n" +
+                        "nextSteps: [Give me the **hard, cold truth** about what to fix before my next interview so I don’t sound like an NPC repeating the same dialogue in a broken video game. I need **real** advice, not ‘believe in yourself’ motivational poster nonsense.]\n\n" +
 
-                        "speechAnalysis: [Did I sound like a charismatic TED Talk speaker, or was I giving ‘nervous kid presenting in class while the PowerPoint crashes’ energy? Break it down—was my voice smooth, shaky, or ‘bro, breathe’ levels of bad?]\n\n" +
+                        "speechAnalysis: [Did I sound like a smooth talker ready to sell ice to an Eskimo, or was I giving ‘kid forced to read aloud in class’ energy? Break it down—was my voice smooth, shaky, or ‘bro, do you need water?’ levels of bad?]\n\n" +
 
-                        "NO unnecessary formatting. Just **pure, structured brutality**. **Give me the roast I deserve but also the wisdom I need.** Let’s go.",
+                        "**NO unnecessary formatting. No emojis. Just pure, structured brutality.** **I want the roast I deserve but also the wisdom I need.** Don’t hold back—let’s go.",
                 dominantEmotion, totalFramesAnalyzed, totalFramesAnalyzed, eyeContactScore, confidenceScore,
                 emotionSummary.toString(), question.getQuestionText(), answer
         );
+
 
 
 
