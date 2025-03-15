@@ -113,17 +113,16 @@ public class SessionServiceImpl implements SessionService {
     @Transactional
     public InterviewSession startSession(UUID userId,UUID scheduledId) throws MessagingException {
         ScheduledInterview scheduledInterview=scheduledInterviewRepository.findById(scheduledId).orElseThrow(()->new NotFoundException("A scheduled interview not found!"));
-        System.out.println("now"+LocalDateTime.now());
-        System.out.println("sch"+scheduledInterview.getScheduledAt());
-        System.out.println(!(scheduledInterview.getInterviewerId().equals(userId) || scheduledInterview.getIntervieweeId().equals(userId)));
-        System.out.println(LocalDateTime.now().isBefore(scheduledInterview.getScheduledAt())
-                || LocalDateTime.now().isAfter(scheduledInterview.getScheduledAt().plusHours(2)));
+
 
         if (!(scheduledInterview.getInterviewerId().equals(userId) || scheduledInterview.getIntervieweeId().equals(userId))) {
             throw new IllegalArgumentException("Unauthorized: You are not part of this interview.");
         }
-
         LocalDateTime currentTime = LocalDateTime.now().minusHours(9);
+        System.out.println("now"+currentTime);
+        System.out.println("sch"+scheduledInterview.getScheduledAt());
+        System.out.println(currentTime.isBefore(scheduledInterview.getScheduledAt())
+                || currentTime.isAfter(scheduledInterview.getScheduledAt().plusHours(2)));
 
         // Validate the interview timing
         LocalDateTime interviewStartTime = scheduledInterview.getScheduledAt();
