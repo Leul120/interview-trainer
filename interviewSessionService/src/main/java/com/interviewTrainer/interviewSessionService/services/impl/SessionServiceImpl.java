@@ -442,9 +442,9 @@ public class SessionServiceImpl implements SessionService {
     """.formatted(scheduledInterview.getScheduledAt().format(formatter),
                 scheduledInterview.getScheduledAt().plus(scheduledInterview.getDuration()).format(timeFormatter),
                 name, // Placeholder for recipient's name
-                "http://localhost:3000/interview/meeting/"+scheduledInterview.getId()+"?session=" + session.getId(), // Meeting link (used twice)
-                "http://localhost:3000/interview/meeting/"+scheduledInterview.getId()+"?session=" + session.getId(), // Meeting link (used twice)
-                "http://localhost:3000/interview/meeting/"+scheduledInterview.getId()+"?session=" + session.getId(), // Meeting link (used twice)
+                "https://intervw.vercel.app/interview/meeting/"+scheduledInterview.getId()+"?session=" + session.getId(), // Meeting link (used twice)
+                "https://intervw.vercel.app/interview/meeting/"+scheduledInterview.getId()+"?session=" + session.getId(), // Meeting link (used twice)
+                "https://intervw.vercel.app/interview/meeting/"+scheduledInterview.getId()+"?session=" + session.getId(), // Meeting link (used twice)
                 name, // Your name
                 expertise // Your position/expertise
         );
