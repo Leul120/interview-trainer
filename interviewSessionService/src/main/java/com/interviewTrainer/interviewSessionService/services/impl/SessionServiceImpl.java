@@ -98,7 +98,7 @@ public class SessionServiceImpl implements SessionService {
         }
 
         session.setStatus(InterviewStatus.ONGOING);
-        session.setStartedAt(LocalDateTime.now());
+        session.setStartedAt(currentTime);
         session=sessionRepository.save(session);
         session.setToken(token);
         return session;
@@ -163,7 +163,7 @@ public class SessionServiceImpl implements SessionService {
 
         session.setRoom(roomId);
         session.setToken(token);
-        session.setStatus(InterviewStatus.ONGOING);
+        
         session = sessionRepository.save(session);
 
         // Fetch the other participant's details in a single API call
