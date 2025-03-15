@@ -124,7 +124,7 @@ public class EmotionDetectionServiceImpl implements EmotionDetectionService {
                         "speechAnalysis: [Did I sound like a smooth talker ready to sell ice to an Eskimo, or was I giving ‘kid forced to read aloud in class’ energy? Break it down—was my voice smooth, shaky, or ‘bro, do you need water?’ levels of bad?]\n\n" +
 
                         "overallPerformanceScore:[Give me an overall score considering all this analysis]\n\n"+
-                        
+
                         "**NO unnecessary formatting. No emojis. Just pure, structured brutality.** **I want the roast I deserve but also the wisdom I need.** Don’t hold back—let’s go.",
                 dominantEmotion, totalFramesAnalyzed, totalFramesAnalyzed, eyeContactScore, confidenceScore,
                 emotionSummary.toString(), question.getQuestionText(), answer
