@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -117,9 +118,9 @@ public class SessionServiceImpl implements SessionService {
         ScheduledInterview scheduledInterview = scheduledInterviewRepository.findById(scheduledId)
                 .orElseThrow(() -> new NotFoundException("A scheduled interview not found!"));
 
-        // Use UTC for all time computations
-        LocalDateTime currentTimeUtc = LocalDateTime.now(ZoneId.of("UTC"));
-        LocalDateTime interviewStartTimeUtc = scheduledInterview.getScheduledAt().atZone(ZoneId.of("UTC")).toLocalDateTime();
+        // Use ZonedDateTime for UTC time
+        ZonedDateTime currentTimeUtc = ZonedDateTime.now(ZoneId.of("UTC"));
+        ZonedDateTime interviewStartTimeUtc = scheduledInterview.getScheduledAt().atZone(ZoneId.of("UTC"));
 
         // Debugging logs
         System.out.println("Current Time (UTC): " + currentTimeUtc);
