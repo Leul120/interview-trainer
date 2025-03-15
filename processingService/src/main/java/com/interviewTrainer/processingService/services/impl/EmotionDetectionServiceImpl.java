@@ -195,6 +195,7 @@ public class EmotionDetectionServiceImpl implements EmotionDetectionService {
         String nextSteps = extractValue(generatedText, "nextSteps:", "speechAnalysis:");
         String answerAnalysis=extractValue(generatedText,"speechAnalysis:","overallPerformanceScore");
         String overallScore=extractValue(generatedText,"overallPerformanceScore","");
+        System.out.println(overallScore);
         // Create and save analysis
 
         AiAnalysis analysis = AiAnalysis.builder()
@@ -204,7 +205,7 @@ public class EmotionDetectionServiceImpl implements EmotionDetectionService {
                 .usersAnswer(answer)
                 .questionId(question.getId())
                 .emotionAnalysis(emotionAnalysis)
-                .overallPerformanceScore(Double.parseDouble(overallScore))
+                .overallPerformanceScore(Double.parseDouble(overallScore.trim()))
                 .speechAnalysis(answerAnalysis)
                 .eyeContactScore(eyeContactScore)
                 .confidenceScore(confidenceScore)
