@@ -68,10 +68,14 @@ public class SessionServiceImpl implements SessionService {
     @Transactional
     public InterviewSession joinSession(UUID sessionId,UUID userId,UUID scheduleId) {
         ScheduledInterview scheduledInterview=scheduledInterviewRepository.findById(scheduleId).orElseThrow(()->new NotFoundException("A scheduled interview not found!"));
-        if (!(scheduledInterview.getInterviewerId().equals(userId) || scheduledInterview.getIntervieweeId().equals(userId))
-                || LocalDateTime.now().isBefore(scheduledInterview.getScheduledAt())
-                || LocalDateTime.now().isAfter(scheduledInterview.getScheduledAt().plusHours(2))) {
-            throw new IllegalArgumentException("The scheduled time has either not arrived or passed!");
+        if (!(scheduledInterview.getInterviewerId().equals(userId) || scheduledInterview.getIntervieweeId().equals(userId))) {
+            throw new IllegalArgumentException("Unauthorized: You are not part of this interview.");
+        }
+        LocalDateTime currentTime = LocalDateTime.now().minusHours(9);
+        // Validate the interview timing
+        LocalDateTime interviewStartTime = scheduledInterview.getScheduledAt();
+        if (currentTime.isBefore(interviewStartTime) || currentTime.isAfter(interviewStartTime.plusHours(2))) {
+            throw new IllegalArgumentException("The scheduled time has either not arrived or has already passed!");
         }
 
         InterviewSession session=sessionRepository.findById(sessionId).orElseThrow(()->new NotFoundException("Session not found!"));
