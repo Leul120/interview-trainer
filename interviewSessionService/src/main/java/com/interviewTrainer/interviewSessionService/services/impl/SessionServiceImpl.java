@@ -163,7 +163,7 @@ public class SessionServiceImpl implements SessionService {
 
         session.setRoom(roomId);
         session.setToken(token);
-        
+
         session = sessionRepository.save(session);
 
         // Fetch the other participant's details in a single API call
