@@ -194,7 +194,7 @@ public class EmotionDetectionServiceImpl implements EmotionDetectionService {
         String aiFeedback = extractValue(generatedText, "aiFeedback:", "nextSteps:");
         String nextSteps = extractValue(generatedText, "nextSteps:", "speechAnalysis:");
         String answerAnalysis=extractValue(generatedText,"speechAnalysis:","overallPerformanceScore");
-        String overallScore=extractValue(generatedText,"overallPerformanceScore","");
+        String overallScore=extractValue(generatedText,"overallPerformanceScore:","");
         System.out.println(overallScore);
         // Create and save analysis
 
