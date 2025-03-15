@@ -28,6 +28,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -118,47 +119,62 @@ public class SessionServiceImpl implements SessionService {
         System.out.println(LocalDateTime.now().isBefore(scheduledInterview.getScheduledAt())
                 || LocalDateTime.now().isAfter(scheduledInterview.getScheduledAt().plusHours(2)));
 
-        if (!(scheduledInterview.getInterviewerId().equals(userId) || scheduledInterview.getIntervieweeId().equals(userId))
-                || LocalDateTime.now().isBefore(scheduledInterview.getScheduledAt())
-                || LocalDateTime.now().isAfter(scheduledInterview.getScheduledAt().plusHours(2))) {
-            throw new IllegalArgumentException("The scheduled time has either not arrived or passed!");
+        if (!(scheduledInterview.getInterviewerId().equals(userId) || scheduledInterview.getIntervieweeId().equals(userId))) {
+            throw new IllegalArgumentException("Unauthorized: You are not part of this interview.");
         }
 
-        try {
-            UserResponseDTO user=userClient.getUserById(userId).getBody();
-            assert user != null;
-            boolean interviewer;
-            String roomId=String.valueOf(Math.floor(Math.random()*100000));
-            TokenRequest tokenRequest=TokenRequest.builder()
-                    .roomId(roomId)
-                    .participant("Host")
-                    .build();
+        LocalDateTime currentTime = LocalDateTime.now();
 
-            String token=getToken(tokenRequest);
-            InterviewSession session = new InterviewSession();
-            if (user.getType().equals("INTERVIEWER")){
-                session.setInterviewerId(userId);
-                interviewer=true;
-            }else {
-                interviewer=false;
-                session.setIntervieweeId(userId);
-            }
-            session.setRoom(roomId);
-            session.setToken(token);
-            session.setStatus(InterviewStatus.ONGOING);
-            session=sessionRepository.save(session);
-            if(interviewer){
-                UserResponseDTO user2=userClient.getUserById(scheduledInterview.getIntervieweeId()).getBody();
-                sendEmail(user2.getEmail(),session, user.getName(),user.getExpertise(),scheduledInterview);
-            }else {
-                UserResponseDTO user2=userClient.getUserById(scheduledInterview.getInterviewerId()).getBody();
-                sendEmail(user2.getEmail(),session, user.getName(),user.getExpertise(),scheduledInterview);
-            }
-            return session;
-        } catch (MessagingException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
+        // Validate the interview timing
+        LocalDateTime interviewStartTime = scheduledInterview.getScheduledAt();
+        if (currentTime.isBefore(interviewStartTime) || currentTime.isAfter(interviewStartTime.plusHours(2))) {
+            throw new IllegalArgumentException("The scheduled time has either not arrived or has already passed!");
         }
+
+        // Fetch user details in one API call
+        ResponseEntity<UserResponseDTO> userResponse = userClient.getUserById(userId);
+        if (userResponse.getBody() == null) {
+            throw new NotFoundException("User not found!");
+        }
+        UserResponseDTO user = userResponse.getBody();
+
+        // Generate a unique room ID using UUID
+        String roomId = UUID.randomUUID().toString();
+
+        // Request a session token
+        TokenRequest tokenRequest = TokenRequest.builder()
+                .roomId(roomId)
+                .participant("Host")
+                .build();
+        String token = getToken(tokenRequest);
+
+        // Create the interview session
+        InterviewSession session = new InterviewSession();
+        boolean isInterviewer = user.getType().equalsIgnoreCase("INTERVIEWER");
+
+        if (isInterviewer) {
+            session.setInterviewerId(userId);
+        } else {
+            session.setIntervieweeId(userId);
+        }
+
+        session.setRoom(roomId);
+        session.setToken(token);
+        session.setStatus(InterviewStatus.ONGOING);
+        session = sessionRepository.save(session);
+
+        // Fetch the other participant's details in a single API call
+        UUID otherUserId = isInterviewer ? scheduledInterview.getIntervieweeId() : scheduledInterview.getInterviewerId();
+        ResponseEntity<UserResponseDTO> otherUserResponse = userClient.getUserById(otherUserId);
+        if (otherUserResponse.getBody() == null) {
+            throw new NotFoundException("The other participant's details could not be found.");
+        }
+        UserResponseDTO otherUser = otherUserResponse.getBody();
+
+        // Send email notification
+        sendEmail(otherUser.getEmail(), session, user.getName(), user.getExpertise(), scheduledInterview);
+
+        return session;
     }
     @Override
 //    @Cacheable(value = "interviewSessions")
