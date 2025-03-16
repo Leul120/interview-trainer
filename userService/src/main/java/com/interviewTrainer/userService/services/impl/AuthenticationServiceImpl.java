@@ -1,9 +1,7 @@
 package com.interviewTrainer.userService.services.impl;
 
 
-import com.interviewTrainer.userService.entity.AvailabilityStatus;
-import com.interviewTrainer.userService.entity.Role;
-import com.interviewTrainer.userService.entity.User;
+import com.interviewTrainer.userService.entity.*;
 import com.interviewTrainer.userService.repositories.UserRepository;
 import com.interviewTrainer.userService.requests.JwtAuthenticationRequest;
 import com.interviewTrainer.userService.requests.RefreshTokenRequest;
@@ -19,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -48,8 +47,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             user.setBiography(signUpRequest.getBiography());
             user.setAvailabilityStatus(AvailabilityStatus.UNAVAILABLE);
             user.setExpertise(signUpRequest.getExpertise());
-            user.setAwards(signUpRequest.getAwards());
-            user.setExperiences(signUpRequest.getExperiences());
+            List<Award> awards = signUpRequest.getAwards();
+            if (awards != null) {
+                for (Award award : awards) {
+                    award.setUser(user); 
+                }
+            }
+            user.setAwards(awards);
+
+            List<Experience> experiences = signUpRequest.getExperiences();
+            if (experiences != null) {
+                for (Experience experience : experiences) {
+                    experience.setUser(user);
+                }
+            }
+            user.setExperiences(experiences);
             user.setIndustry(signUpRequest.getIndustry());
             user.setProfilePicture(signUpRequest.getProfilePicture());
             user.setType(signUpRequest.getType());
