@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Experience {
     private String title;
     private String description;
