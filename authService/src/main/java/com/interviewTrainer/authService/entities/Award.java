@@ -10,7 +10,6 @@ import java.time.Year;
 import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Award {
 
     private String title;
