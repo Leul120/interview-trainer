@@ -22,5 +22,6 @@ public interface UserService {
     List<UserResponse> getInterviewers();
     List<UserResponseDTO> getUsersByIds(List<UUID> ids);
     void setOnlineStatus(UUID userId,Boolean status);
+    UserResponse getUser(UUID id);
     void updateConfidenceScore(UUID userId,double confidenceScore,double overAllScore);
 }
