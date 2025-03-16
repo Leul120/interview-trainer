@@ -47,9 +47,9 @@ public class UserController {
     public ResponseEntity<UserResponseDTO> getUserByEmail(@PathVariable String email){
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
-    @GetMapping("/get-user")
-    public ResponseEntity<UserResponseDTO> getUser(@RequestAttribute("userId") UUID userId){
-        return ResponseEntity.ok(userService.getUserById(userId));
+    @GetMapping("/get-user-id")
+    public ResponseEntity<UserResponse> getUser(@RequestAttribute("userId") UUID userId){
+        return ResponseEntity.ok(userService.getUser(userId));
     }
     @PostMapping("/update-score/{userId}/{confidenceScore}/{overAllScore}")
     public void updateScore(@PathVariable UUID userId,@PathVariable double confidenceScore,@PathVariable double overAllScore){
