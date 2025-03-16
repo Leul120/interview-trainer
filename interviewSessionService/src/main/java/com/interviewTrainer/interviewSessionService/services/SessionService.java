@@ -16,6 +16,7 @@ public interface SessionService {
     InterviewSession startSession(UUID userId,UUID scheduledId) throws MessagingException;
 //    void sendEmail(String email,InterviewSession session,String name,String expertise,UUID scheduleId) throws MessagingException;
     InterviewSession startAiSession(UUID userId,String title);
-    public PagingResult<InterviewSession> getIntervieweeSessions(UUID userId, PaginationRequest request);
-    PagingResult<ScheduledInterview> getIntervieweeSchedules(UUID userId,PaginationRequest request);    ScheduledInterview schedule(UUID userId, ScheduledInterview scheduledInterview);
+    public PagingResult<InterviewSession> getIntervieweeSessions(UUID userId, PaginationRequest request,String status);
+    PagingResult<ScheduledInterview> getIntervieweeSchedules(UUID userId,PaginationRequest request);
+    ScheduledInterview schedule(UUID userId, ScheduledInterview scheduledInterview);
 }
