@@ -50,7 +50,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             List<Award> awards = signUpRequest.getAwards();
             if (awards != null) {
                 for (Award award : awards) {
-                    award.setUser(user); 
+                    award.setUser(user);
                 }
             }
             user.setAwards(awards);
