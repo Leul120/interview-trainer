@@ -113,7 +113,7 @@ public class UserController {
         return ResponseEntity.ok(authenticationService.signIn(signInRequest));
 
     }
-    @PostMapping("/update-user/{id}")
+    @PostMapping("/update-user/${id}")
     public ResponseEntity<User> updateUser(@PathVariable UUID id,@RequestBody UserRequest userRequest) throws IllegalAccessException {
 
         return ResponseEntity.ok(userService.updateUser(id,userRequest));
