@@ -1,12 +1,15 @@
 package com.interviewTrainer.userService.responses;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.interviewTrainer.userService.entity.Award;
+import com.interviewTrainer.userService.entity.Experience;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -21,6 +24,8 @@ public class UserResponseDTO {
     private String role;
     private String type;
     private String industry;
+    private List<Experience> experiences;
+    private List<Award> awards;
     private double overallPerformanceScore;
     private double confidenceScore;
     private String availabilityStatus;
