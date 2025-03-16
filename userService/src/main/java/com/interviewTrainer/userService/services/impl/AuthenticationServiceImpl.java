@@ -47,6 +47,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             user.setBiography(signUpRequest.getBiography());
             user.setAvailabilityStatus(AvailabilityStatus.UNAVAILABLE);
             user.setExpertise(signUpRequest.getExpertise());
+            System.out.println("Received Awards: " + signUpRequest.getAwards());
+
             List<Award> awards = signUpRequest.getAwards();
             if (awards != null) {
                 for (Award award : awards) {
@@ -55,6 +57,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 }
             }
             user.setAwards(awards);
+            System.out.println("Received Experiences: " + signUpRequest.getExperiences());
 
             List<Experience> experiences = signUpRequest.getExperiences();
             if (experiences != null) {
