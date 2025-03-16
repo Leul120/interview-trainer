@@ -181,12 +181,17 @@ public class SessionServiceImpl implements SessionService {
     }
     @Override
 //    @Cacheable(value = "interviewSessions")
-    public PagingResult<InterviewSession> getIntervieweeSessions(UUID userId, PaginationRequest request) {
+    public PagingResult<InterviewSession> getIntervieweeSessions(UUID userId, PaginationRequest request,String status) {
         Pageable pageable = PaginationUtils.getPageable(request);
+        Page<InterviewSession> sessions;
 
-        // Ensure your repository method supports pagination!
-        Page<InterviewSession> sessions = sessionRepository.findInterviewSessionByIntervieweeId(userId, pageable);
+        if (status == null || status.isEmpty() || status.equalsIgnoreCase("ALL")) {
 
+            sessions = sessionRepository.findInterviewSessionByIntervieweeId(userId, pageable);
+        } else {
+
+            sessions = sessionRepository.findInterviewSessionByIntervieweeIdAndStatus(userId, InterviewStatus.valueOf(status), pageable);
+        }
         return new PagingResult<>(
                 sessions.getContent(),
                 sessions.getNumber()+1,  // Page number
