@@ -51,6 +51,13 @@ public class UserServiceImpl implements UserService {
         return mapToDTO(user);
 
     }
+    @Override
+//    @Cacheable(value = "userResponse" ,key="#id",unless = "#result == null")
+    public UserResponse getUser(UUID id){
+        User user=userRepository.findById(id).orElseThrow(()->new RuntimeException("User not found!"));
+        return mapToUserResponse(user);
+
+    }
 
     @Override
     public void setOnlineStatus(UUID userId,Boolean status){
