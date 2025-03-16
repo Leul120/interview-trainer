@@ -91,6 +91,8 @@ public class UserServiceImpl implements UserService {
         userResponseDTO.setOnline(user.isOnline());
         userResponseDTO.setWasOnlineAt(user.getWasOnlineAt());
         userResponseDTO.setIndustry(user.getIndustry());
+        userResponseDTO.setExperiences(user.getExperiences());
+        user.setAwards(user.getAwards());
         userResponseDTO.setConfidenceScore(user.getConfidenceScore());
         userResponseDTO.setOverallPerformanceScore(user.getOverallPerformanceScore());
         userResponseDTO.setAvailabilityStatus(user.getAvailabilityStatus().toString());
