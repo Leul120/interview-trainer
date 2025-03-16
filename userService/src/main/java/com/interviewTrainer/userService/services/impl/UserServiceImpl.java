@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
     public void setOnlineStatus(UUID userId,Boolean status){
         User user=userRepository.findById(userId).orElseThrow(()->new NotFoundException("User not found!"));
         user.setOnline(status);
+        userRepository.save(user);
 
     }
     @Override
