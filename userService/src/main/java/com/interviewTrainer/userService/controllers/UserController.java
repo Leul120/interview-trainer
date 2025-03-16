@@ -88,7 +88,7 @@ public class UserController {
     }
     @GetMapping("/online-status/{status}")
     public void setOnlineStatus(@RequestAttribute("userId") UUID userId,@PathVariable Boolean status){
-        System.out.println(userId);
+        System.out.println(status);
         userService.setOnlineStatus(userId,status);
     }
     @PostMapping("/get-users-by-ids")
