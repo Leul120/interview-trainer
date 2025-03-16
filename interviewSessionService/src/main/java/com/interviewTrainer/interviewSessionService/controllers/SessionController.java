@@ -57,7 +57,7 @@ public class SessionController {
     }
     @GetMapping("/generate-link")
     public String generateInterviewLink() {
-        String interviewLink = "https://localhost:3000/interview/real-person-interview?token=" + UUID.randomUUID().toString();
+        String interviewLink = "https://intervw.vercel.app/interview/real-person-interview?token=" + UUID.randomUUID().toString();
         // Optionally, save this link to a database
         return interviewLink;
     }
@@ -66,10 +66,13 @@ public class SessionController {
                                                                                                   @RequestParam(required = false) Integer page,
                                                                                                   @RequestParam(required = false) Integer size,
                                                                                                   @RequestParam(required = false) String sortField,
-                                                                                                  @RequestParam(required = false) Sort.Direction direction){
+                                                                                                  @RequestParam(required = false) Sort.Direction direction,
+                                                                                                  @RequestParam(required =false)  String status
+
+    ){
         final PaginationRequest request = new PaginationRequest(page-1, size, sortField, direction);
 
-        return ResponseEntity.ok(sessionService.getIntervieweeSessions(userId,request));
+        return ResponseEntity.ok(sessionService.getIntervieweeSessions(userId,request,status));
     }
     @PostMapping("/schedule-interview")
     public ResponseEntity<ScheduledInterview> schedule(@RequestAttribute("userId") UUID userId,@RequestBody ScheduledInterview scheduledInterview){
@@ -80,12 +83,12 @@ public class SessionController {
                                                                            @RequestParam(required = false) Integer page,
                                                                            @RequestParam(required = false) Integer size,
                                                                            @RequestParam(required = false) String sortField,
-                                                                           @RequestParam(required = false) Sort.Direction direction,
-                                                                           @RequestParam(required =false)  String status
+                                                                           @RequestParam(required = false) Sort.Direction direction
+
 
     ){
         final PaginationRequest request = new PaginationRequest(page-1, size, sortField, direction);
-        return ResponseEntity.ok(sessionService.getIntervieweeSchedules(userId,request,status));
+        return ResponseEntity.ok(sessionService.getIntervieweeSchedules(userId,request));
     }
 
 
