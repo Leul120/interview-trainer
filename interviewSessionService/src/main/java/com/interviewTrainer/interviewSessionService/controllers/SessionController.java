@@ -80,9 +80,12 @@ public class SessionController {
                                                                            @RequestParam(required = false) Integer page,
                                                                            @RequestParam(required = false) Integer size,
                                                                            @RequestParam(required = false) String sortField,
-                                                                           @RequestParam(required = false) Sort.Direction direction){
+                                                                           @RequestParam(required = false) Sort.Direction direction,
+                                                                           @RequestParam(required =false)  String status
+
+    ){
         final PaginationRequest request = new PaginationRequest(page-1, size, sortField, direction);
-        return ResponseEntity.ok(sessionService.getIntervieweeSchedules(userId,request));
+        return ResponseEntity.ok(sessionService.getIntervieweeSchedules(userId,request,status));
     }
 
 
