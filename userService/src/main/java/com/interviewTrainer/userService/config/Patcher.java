@@ -21,6 +21,4 @@ public class Patcher {
             field.setAccessible(false);
         }
     }
-
-
 }
