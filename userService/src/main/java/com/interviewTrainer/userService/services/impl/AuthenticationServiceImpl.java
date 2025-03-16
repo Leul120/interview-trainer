@@ -51,6 +51,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             if (awards != null) {
                 for (Award award : awards) {
                     award.setUser(user);
+
                 }
             }
             user.setAwards(awards);
