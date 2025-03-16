@@ -34,7 +34,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<JwtAuthenticationRequest> signup(@RequestBody SignUpRequest signUpRequest){
-
+        System.out.println(signUpRequest);
             return ResponseEntity.ok(userClient.signup(signUpRequest).getBody());
 
     }
