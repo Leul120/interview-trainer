@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(name = "userService",url = "https://user-service-7p0j.onrender.com",path = "/api/v1/user")
+@FeignClient(name = "userService",url = "https://user-service-ubos.onrender.com",path = "/api/v1/user")
 public interface UserClient {
     @GetMapping("/get-user/{email}")
     public ResponseEntity<UserResponseDTO> getUserByEmail(@PathVariable String email);
