@@ -1,0 +1,36 @@
+<project version="4">
+  <component name="ExternalSystemProjectTracker">
+    <option name="projectSettingsTrackerStates">
+      <map>
+        <entry>
+          <key>
+            <Id>
+              <option name="externalProjectPath" value="Dictionary" />
+              <option name="systemId" value="MAVEN" />
+            </Id>
+          </key>
+          <value>
+            <Project>
+              <option name="settingsTracker">
+                <State>
+                  <option name="dirty" value="false" />
+                  <option name="settingsFiles">
+                    <map>
+                      <entry key="$PROJECT_DIR$/pom.xml" value="2825932817" />
+                    </map>
+                  </option>
+                </State>
+              </option>
+            </Project>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+</project>
